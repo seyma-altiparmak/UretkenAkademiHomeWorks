@@ -76,7 +76,6 @@ public class UIMathManager : MonoBehaviour
             if (int.TryParse(INPUT_Number1.text, out int num1) && int.TryParse(INPUT_Number2.text, out int num2))
             {
                 string result = ""; // Sonucu biriktirmek için bir deðiþken
-
                 switch (op)
                 {
                     case 0:
@@ -119,7 +118,7 @@ public class UIMathManager : MonoBehaviour
                         break;
                 }
 
-                OUTPUT_Txt.text = result; // Sonucu OUTPUT_Txt.text'e atayýn
+                OUTPUT_Txt.text = result; 
             }
         }
     }
