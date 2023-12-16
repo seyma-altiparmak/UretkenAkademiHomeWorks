@@ -6,8 +6,8 @@ using System;
 
 public class UIMathManager : MonoBehaviour
 {
-    private TextMeshProUGUI INPUT_Number1;
-    protected TextMeshProUGUI INPUT_Number2;
+    private TMP_InputField INPUT_Number1;
+    protected TMP_InputField INPUT_Number2;
     public TextMeshProUGUI OUTPUT_Txt;
 
     private int OperationNumber;
@@ -16,10 +16,10 @@ public class UIMathManager : MonoBehaviour
     {
         INPUT_Number1 =
         GameObject.Find("FirstNumber_INPUT").
-        GetComponent<TextMeshProUGUI>();
+        GetComponent<TMP_InputField>();
         INPUT_Number2 =
         GameObject.Find("SecondNumber_INPUT").
-        GetComponent<TextMeshProUGUI>();
+        GetComponent<TMP_InputField>();
     }
     public void OUTPUT_BUTTON_ALL()
     {
@@ -46,12 +46,12 @@ public class UIMathManager : MonoBehaviour
         OperationNumber = 4;
         ALLOperation(OperationNumber);
     }
-    public bool ERROR_Controller(TextMeshProUGUI input)
+    public bool ERROR_Controller(TMP_InputField input)
     {
         bool isPositive = false;
         try
         {
-            string iint = (input.text);
+            string iint = Convert.ToString(input.text);
             int number = Convert.ToInt32(iint);
             if (number > 0)
             {
@@ -81,35 +81,35 @@ public class UIMathManager : MonoBehaviour
                 {
                     case 0:
                         result = "All Numbers : \n";
-                        for (int i = num1; i < num2; i++)
+                        for (int i = num1; i <= num2; i++)
                         {
                             result += $"{i} - ";
                         }
                         break;
                     case 1:
                         result = "Even Numbers : \n";
-                        for (int i = num1; i < num2; i++)
+                        for (int i = num1; i <= num2; i++)
                         {
                             if (i % 2 == 0) result += $"{i} - ";
                         }
                         break;
                     case 2:
                         result = "Odd Numbers : \n";
-                        for (int i = num1; i < num2; i++)
+                        for (int i = num1; i <= num2; i++)
                         {
                             if (i % 2 != 0) result += $"{i} - ";
                         }
                         break;
                     case 3:
                         result = "/3 Numbers : \n";
-                        for (int i = num1; i < num2; i++)
+                        for (int i = num1; i <= num2; i++)
                         {
                             if (i % 3 == 0) result += $"{i} - ";
                         }
                         break;
                     case 4:
                         result = "/5 Numbers : \n";
-                        for (int i = num1; i < num2; i++)
+                        for (int i = num1; i <= num2; i++)
                         {
                             if (i % 5 == 0) result += $"{i} - ";
                         }
