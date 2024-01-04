@@ -1,25 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CarController : MonoBehaviour
 {
-    private GameObject UI_Positive,UI_Negative;
+    private GameObject UI_Negative;
     private Vector3 inputController;
     private Vector3 hizController;
     public float drift = 10f; // Adjust this value to control the drift force
     float moveHorizontal;
     float moveVertical;
+    Light lightDirect;
+    TextMeshProUGUI tmp;
+
+    /*
+     * Color Changer:
+     */
+
+    Color normal = new Color(
+    (float)(0xFF) / 255f,
+    (float)(0xE8) / 255f,
+    (float)(0xBE) / 255f,
+    1f
+    );
+
+    Color red = new Color(
+        (float)(0xFF) / 255f,
+        (float)(0x18) / 255f,
+        (float)(0x00) / 255f,
+        1f
+        );
+
     private void Awake()
     {
-        UI_Positive = GameObject.Find("UI_Positive");
         UI_Negative = GameObject.Find("UI_Negative");
         //Set Active - false part
-        if (UI_Positive != null && UI_Negative != null)
-        {
-            UI_Positive.SetActive(false);
-            UI_Negative.SetActive(false);
-        }
+        lightDirect = GameObject.Find("Directional Light").GetComponent<Light>();
+        if (lightDirect != null) lightDirect.color = normal;
+        if (UI_Negative != null) { UI_Negative.SetActive(false); }
+        tmp = GameObject.Find("TimeScore").GetComponent<TextMeshProUGUI>();
     }
     void Start()
     {
@@ -47,14 +67,28 @@ public class CarController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out Engel engel))
+        if (other.gameObject.TryGetComponent(out Engel engel))
         {
             print("engele carptým");
-            if(UI_Negative != null)UI_Negative.SetActive(true);
+            if (UI_Negative != null) UI_Negative.SetActive(true);
         }
-        if(other.gameObject.TryGetComponent(out End end))
+        if (other.gameObject.TryGetComponent(out End end))
         {
-            if(UI_Positive != null)UI_Positive.SetActive(true);
+            if (UI_Negative != null) UI_Negative.SetActive(true);
+        }
+        if (other.gameObject.TryGetComponent(out Sinir sinir))
+        {
+            lightDirect.color = red;
+            print("detected sinir.");
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.TryGetComponent(out Sinir sinir))
+        {
+            lightDirect.color = normal;
         }
     }
 }
