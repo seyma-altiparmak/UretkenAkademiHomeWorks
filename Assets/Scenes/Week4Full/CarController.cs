@@ -13,6 +13,8 @@ public class CarController : MonoBehaviour
     float moveVertical;
     Light lightDirect;
     TextMeshProUGUI tmp;
+    float score;
+    Vector3 startPoint;
 
     /*
      * Color Changer:
@@ -38,12 +40,10 @@ public class CarController : MonoBehaviour
         //Set Active - false part
         lightDirect = GameObject.Find("Directional Light").GetComponent<Light>();
         if (lightDirect != null) lightDirect.color = normal;
-        if (UI_Negative != null) { UI_Negative.SetActive(false); }
-        tmp = GameObject.Find("TimeScore").GetComponent<TextMeshProUGUI>();
+        if (UI_Negative != null) { UI_Negative.SetActive(false);}
+        startPoint = new Vector3(0f, 0f, -260f);
     }
-    void Start()
-    {
-    }
+ 
 
     // Update is called once per frame
     void FixedUpdate()
@@ -63,6 +63,9 @@ public class CarController : MonoBehaviour
             }
         }
         transform.position += hizController;
+        score = (transform.position.z - startPoint.z)/10;
+        tmp = GameObject.Find("Scorer").GetComponent<TextMeshProUGUI>();
+        tmp.text = "Score " + score.ToString("F2");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -71,10 +74,12 @@ public class CarController : MonoBehaviour
         {
             print("engele carptým");
             if (UI_Negative != null) UI_Negative.SetActive(true);
+            ScoreGenerator();
         }
         if (other.gameObject.TryGetComponent(out End end))
         {
             if (UI_Negative != null) UI_Negative.SetActive(true);
+            ScoreGenerator();
         }
         if (other.gameObject.TryGetComponent(out Sinir sinir))
         {
@@ -82,6 +87,14 @@ public class CarController : MonoBehaviour
             print("detected sinir.");
         }
 
+    }
+    float ScoreGenerator()
+    {
+        Time.timeScale = 0;
+        score = (transform.position.z - startPoint.z)/10;
+        tmp = GameObject.Find("TimeScore").GetComponent<TextMeshProUGUI>();
+        tmp.text = "Score " + score.ToString("F2");
+        return score;
     }
 
     private void OnTriggerExit(Collider other)

@@ -10,5 +10,7 @@ public class CanvasComponents : MonoBehaviour
     {
         int getIndexScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(getIndexScene);
+        Time.timeScale = 1;
     }
+
 }

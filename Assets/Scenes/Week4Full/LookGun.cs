@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class LookGun : MonoBehaviour
 {
+    //private:
     private Vector3 NKey;
     private Vector3 MKey;
+
+
     private void Start()
     {
         NKey = new Vector3(0,-.1f,0);
@@ -21,5 +24,8 @@ public class LookGun : MonoBehaviour
         {
             transform.Rotate(MKey,Space.Self);
         }
+
+       
     }
+   
 }
