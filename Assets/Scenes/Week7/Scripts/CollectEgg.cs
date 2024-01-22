@@ -11,6 +11,7 @@ public class CollectEgg : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Egg egg))
         {
             AudioSource.PlayClipAtPoint(gýtVoice, other.transform.position);
+            CollectableController.eggCount += 1;
             this.gameObject.SetActive(false);
         }
     }
