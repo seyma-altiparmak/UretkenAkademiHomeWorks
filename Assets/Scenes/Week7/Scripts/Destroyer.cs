@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public string parentName;
+   
     void Update()
     {
-        
+        parentName = transform.name;
+        StartCoroutine((DestroyClone()));
+    }
+
+    IEnumerator DestroyClone()
+    {
+        yield return new WaitForSeconds(10f);
+        if (parentName == "Section(Clone)")
+        {
+            Destroy(gameObject);
+        }
     }
 }
