@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Classroom : MonoBehaviour
 {
-    private Light light;
+    private Light lightClass;
     private GameObject cube;
     // Start is called before the first frame update
     void Start()
     {
-        light = GameObject.Find("LightWS").GetComponent<Light>();
+        lightClass = GameObject.Find("lightWS").GetComponent<Light>();
         cube = GameObject.FindGameObjectWithTag("light");
     }
 
@@ -19,8 +19,8 @@ public class Classroom : MonoBehaviour
         //1
         print(Input.GetKeyDown(KeyCode.A));
         print(Input.GetKeyUp(KeyCode.A));
-        if (Input.GetKeyDown(KeyCode.Space)) { light.intensity = 1000; light.color = Color.red; }
-        else { light.intensity = 100; light.color = Color.white; }
+        if (Input.GetKeyDown(KeyCode.Space)) { lightClass.intensity = 1000; lightClass.color = Color.red; }
+        else { lightClass.intensity = 100; lightClass.color = Color.white; }
 
         //2
         print("Horizontal : " + Input.GetAxis("Horizontal"));

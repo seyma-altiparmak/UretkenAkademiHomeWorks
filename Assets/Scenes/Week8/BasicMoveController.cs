@@ -22,13 +22,18 @@ public class BasicMoveController : MonoBehaviour
         {
             float yatay = Input.GetAxis("Horizontal");
             float dikey = Input.GetAxis("Vertical");
-            Vector3 direction = new Vector3(dikey, 0, yatay);
+            Vector3 direction = new Vector3(dikey, 0, -yatay);
             rb.AddForce(direction * speed);
 
         }
         else
         {
             rb.velocity = Vector3.zero;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 direction = new Vector3(0, 1f, 0);
+            rb.AddForce(direction * speed);
         }
     }
     private void FixedUpdate()
