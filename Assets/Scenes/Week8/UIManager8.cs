@@ -62,6 +62,7 @@ public class UIManager8 : MonoBehaviour
     public void RestartButton()
     {
         SceneManager.LoadScene(0);
+        timer = 5000;
     }
 
     public void MusicManager()
@@ -69,7 +70,7 @@ public class UIManager8 : MonoBehaviour
         GameObject musicController = GameObject.Find("MusicController");
         if (musicController.GetComponent<AudioSource>().volume != 0)
             musicController.GetComponent<AudioSource>().volume = 0;
-        else musicController.GetComponent<AudioSource>().volume = 100;
+        else musicController.GetComponent<AudioSource>().volume = 1;
     }
 
     public void Remesh(int i)

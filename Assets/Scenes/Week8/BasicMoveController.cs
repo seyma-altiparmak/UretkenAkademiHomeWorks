@@ -32,6 +32,7 @@ public class BasicMoveController : MonoBehaviour
         if(UIManager8.timer < 0)
         {
             SceneManager.LoadScene(0);
+            UIManager8.timer = 5000;
         }
     }
 
@@ -77,7 +78,7 @@ public class BasicMoveController : MonoBehaviour
         }
         else if(other.gameObject.TryGetComponent(out Timehealer th))
         {
-            UIManager8.timer += 1000;
+            UIManager8.timer += 100;
             Destroy(other.gameObject);
         }
         else if(other.gameObject.TryGetComponent(out TimeEnder te))
