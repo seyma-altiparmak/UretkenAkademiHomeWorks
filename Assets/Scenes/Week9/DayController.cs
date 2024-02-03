@@ -6,11 +6,18 @@ using TMPro;
 
 public class DayController : MonoBehaviour
 {
-    public float dayLengthInSeconds = 10f;
+    public float dayLengthInSeconds = 5f;
     private float currentTime = 0f;
-    private int dateTime = 0;
+    public int dateTime = 1;
     [SerializeField] TextMeshProUGUI dateTxt;
     public Material sunnySkybox, nightSkybox;
+    SkyboxTimeController skyboxTimeController;
+
+    private void Awake()
+    {
+        skyboxTimeController = transform.gameObject.GetComponent<SkyboxTimeController>();
+        skyboxTimeController.ChangeSkybox(true);
+    }
 
     void Update()
     {
@@ -22,20 +29,20 @@ public class DayController : MonoBehaviour
             UpdateDate();
         }
         print("devam");
-        if (currentTime < 0.75f) SunAndMoonController(true);
-        else SkyboxTimeController.ChangeSkybox(false);
+        if (currentTime > 0.50f) SunAndMoonController(true);
+        else SunAndMoonController(false);
     }
 
     void SunAndMoonController(bool isSunny)
     {
         print("deiþtim");
-        SkyboxTimeController.ChangeSkybox(isSunny);
-        SkyboxTimeController.ChangeSong(isSunny);
+        skyboxTimeController.ChangeSkybox(isSunny);
+        skyboxTimeController.ChangeSong(isSunny);
     }
 
     void UpdateDate()
     {
         dateTime++;
-        dateTxt.text = "Date - " + dateTime;
+        dateTxt.text = "Day - " + dateTime;
     }
 }

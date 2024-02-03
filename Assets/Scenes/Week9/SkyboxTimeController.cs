@@ -4,25 +4,47 @@ using UnityEngine;
 
 public class SkyboxTimeController : MonoBehaviour
 {
+
     [SerializeField]
-    private static Material sunnySkybox,nightSkybox;
+    private Material sunnySkybox, nightSkybox;
+    [SerializeField]
+    private AudioClip sunny, night;
     DayController dayController;
+    AudioSource audioController;
 
     private void Awake()
     {
         dayController = GameObject.Find("DayController").GetComponent<DayController>();
-        sunnySkybox = dayController.sunnySkybox;
-        nightSkybox = dayController.nightSkybox;
+        audioController = GameObject.Find("AudioController").GetComponent<AudioSource>();
+
+        if (dayController.sunnySkybox != null)
+            sunnySkybox = dayController.sunnySkybox;
+
+        if (dayController.nightSkybox != null)
+            nightSkybox = dayController.nightSkybox;
     }
 
-    public static void ChangeSkybox(bool isSunny)
+    public void ChangeSkybox(bool isSunny)
     {
-        if (isSunny) RenderSettings.skybox = sunnySkybox;
-        else RenderSettings.skybox = nightSkybox;
+        Debug.Log("Changing Skybox: " + (isSunny ? sunnySkybox.name : nightSkybox.name));
+
+        if (isSunny)
+            RenderSettings.skybox = sunnySkybox;
+        else
+            RenderSettings.skybox = nightSkybox;
+
+
+        DynamicGI.UpdateEnvironment();
+
     }
 
-    public static void ChangeSong(bool isSunny)
+    public void ChangeSong(bool isSunny)
     {
-        
+        if (isSunny)
+            audioController.clip = sunny;
+        else
+            audioController.clip = night;
+
+        DynamicGI.UpdateEnvironment();
     }
 }
