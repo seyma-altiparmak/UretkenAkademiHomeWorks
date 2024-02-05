@@ -32,19 +32,26 @@ public class SkyboxTimeController : MonoBehaviour
             RenderSettings.skybox = sunnySkybox;
         else
             RenderSettings.skybox = nightSkybox;
-
-
         DynamicGI.UpdateEnvironment();
 
     }
 
     public void ChangeSong(bool isSunny)
     {
-        if (isSunny)
-            audioController.clip = sunny;
-        else
-            audioController.clip = night;
+        if ((isSunny && audioController.clip != sunny) || (!isSunny && audioController.clip != night))
+        {
+            if (isSunny)
+                audioController.clip = sunny;
+            else
+                audioController.clip = night;
 
-        DynamicGI.UpdateEnvironment();
+            // Play the audio only if it's not already playing
+            if (!audioController.isPlaying)
+            {
+                audioController.Play();
+            }
+
+        }
+
     }
 }

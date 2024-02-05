@@ -12,10 +12,12 @@ public class DayController : MonoBehaviour
     [SerializeField] TextMeshProUGUI dateTxt;
     public Material sunnySkybox, nightSkybox;
     SkyboxTimeController skyboxTimeController;
+    TaskController taskController;
 
     private void Awake()
     {
-        skyboxTimeController = transform.gameObject.GetComponent<SkyboxTimeController>();
+        skyboxTimeController = GetComponent<SkyboxTimeController>();
+        taskController = GameObject.Find("TaskController").GetComponent<TaskController>();
         skyboxTimeController.ChangeSkybox(true);
     }
 
@@ -28,14 +30,20 @@ public class DayController : MonoBehaviour
             currentTime = 0f;
             UpdateDate();
         }
-        print("devam");
-        if (currentTime > 0.50f) SunAndMoonController(true);
+
+        StartCoroutine(DayControl());
+    }
+
+    IEnumerator DayControl()
+    {
+        if (currentTime < 0.50f) SunAndMoonController(true);
         else SunAndMoonController(false);
+
+        yield return new WaitForSeconds(5f);
     }
 
     void SunAndMoonController(bool isSunny)
     {
-        print("deiþtim");
         skyboxTimeController.ChangeSkybox(isSunny);
         skyboxTimeController.ChangeSong(isSunny);
     }
@@ -44,5 +52,18 @@ public class DayController : MonoBehaviour
     {
         dateTime++;
         dateTxt.text = "Day - " + dateTime;
+        StartNewDay();
+    }
+
+    public void StartNewDay()
+    {
+        // Reset task status for the new day
+        taskController.isTaked = false;
+
+        // Enable the task button
+        taskController.takeTaskButton.interactable = true;
+
+        // Optionally, update the date or any other relevant information
+        // ...
     }
 }

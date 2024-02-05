@@ -17,7 +17,6 @@ public class CreateLikeButton : MonoBehaviour
         spawnRangeX = transform.position.x;
         spawnRangeZ = transform.position.z;
         spawnRangeY = transform.position.y;
-        print("x" + spawnRangeX);
     }
     void Update()
     {

@@ -4,76 +4,35 @@ using UnityEngine;
 
 public class Tasks : MonoBehaviour
 {
-    bool isDone = false;
-    public AudioClip birds;
-    public bool JapanesseHousePray()
+    public static bool isJapanDone,
+        isDrumPlay, isCollectApple, isWantSomething = false;
+    public AudioClip JaponClip;
+    private TaskController tc;
+    private void Start()
     {
-        isDone = false;
-        
-        
-        return isDone;
+        tc = GameObject.Find("TaskController").GetComponent<TaskController>();
+    }
+    public void JapanesseHousePray()
+    {
+        isJapanDone = true;
+        tc.TakeTaskW_Day(1);
     }
 
-    public bool CollectVegetable()
+    public void PlayDrum()
     {
-        isDone = false;
-
-
-        return isDone;
+        isDrumPlay = true;
+        tc.TakeTaskW_Day(2);
     }
 
-    public bool PlayDrum()
+    public void CollectApple()
     {
-        isDone = false;
-       
-
-        return isDone;
+        isCollectApple = true;
+        tc.TakeTaskW_Day(3);
     }
 
-    public bool CollectApple()
+    public void WantSomething()
     {
-        isDone = false;
- 
-
-        return isDone;
-    }
-
-    public bool WantSomething()
-    {
-        isDone = false;
-
-
-        return isDone;
-    }
-
-    public bool JustRelax()
-    {
-        isDone = false;
-
-
-        return isDone;
-    }
-
-    public bool WereWolfMode()
-    {
-        isDone = false;
-
-
-
-        return isDone;
-    }
-
-    public bool SellAllFishes()
-    {
-        isDone = false;
-
-        return isDone;
-    }
-
-    public bool BombIt()
-    {
-        isDone = false;
-
-        return isDone;
+        isWantSomething = true;
+        tc.TakeTaskW_Day(4);
     }
 }
