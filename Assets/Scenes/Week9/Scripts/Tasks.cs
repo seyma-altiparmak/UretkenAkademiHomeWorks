@@ -5,7 +5,8 @@ using UnityEngine;
 public class Tasks : MonoBehaviour
 {
     public static bool isJapanDone,
-        isDrumPlay, isCollectApple, isWantSomething = false;
+        isDrumPlay, isCollectApple, 
+        isWantSomething, endTask = false;
     public AudioClip JaponClip;
     private TaskController tc;
     private void Start()
@@ -34,5 +35,11 @@ public class Tasks : MonoBehaviour
     {
         isWantSomething = true;
         tc.TakeTaskW_Day(4);
+    }
+
+    public void End()
+    {
+        endTask = true;
+        tc.TakeTaskW_Day(5);
     }
 }
