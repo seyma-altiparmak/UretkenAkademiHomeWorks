@@ -6,10 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Week9/019.unity
-    guid: 6e0c0ed019c818447b477bddf3c0a2f3
-  - enabled: 1
-    path: Assets/Scenes/Week9/9.unity
-    guid: b7e1cd8574edc444da98f573d32e2234
+    path: Assets/Scenes/Week10_AR/Week10.unity
+    guid: 35e2fa3ca4a80674580b92f1635dd8ec
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 2214e3f68dd005745813cbc2a2c8b946, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 994c23cd5223d1049951a8ee7607c664, type: 2}
